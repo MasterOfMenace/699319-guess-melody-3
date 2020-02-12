@@ -7,7 +7,6 @@ import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.
 const welcomeButtonHandler = () => {};
 
 const App = ({errorsCount, questions}) => {
-  // const {errorsCount} = props;
   return (
     <BrowserRouter>
       <Switch>

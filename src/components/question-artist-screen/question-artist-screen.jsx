@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {GameType} from '../../const';
 
 const QuestionArtistScreen = ({onAnswer, question}) => {
   const {answers, song} = question;
@@ -58,7 +59,7 @@ const QuestionArtistScreen = ({onAnswer, question}) => {
 QuestionArtistScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: PropTypes.shape({
-    type: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
     song: PropTypes.shape({
       artist: PropTypes.string.isRequired,
       src: PropTypes.string.isRequired,
