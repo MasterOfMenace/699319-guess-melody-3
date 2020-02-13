@@ -1,8 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import App from './app.jsx';
+const ARTIST_PICTURE_URL = `https://api.adorable.io/avatars/128`;
 
-const questions = [
+export default [
   {
     type: `artist`,
     song: {
@@ -12,15 +10,15 @@ const questions = [
     answers: [
       {
         artist: `John Snow`,
-        picture: `https://api.adorable.io/avatars/128/1`,
+        picture: `${ARTIST_PICTURE_URL}/${Math.random()}`,
       },
       {
         artist: `Ozzy Osbourne`,
-        picture: `https://api.adorable.io/avatars/128/2`,
+        picture: `${ARTIST_PICTURE_URL}/${Math.random()}`,
       },
       {
         artist: `Jim Beam`,
-        picture: `https://api.adorable.io/avatars/128/3`,
+        picture: `${ARTIST_PICTURE_URL}/${Math.random()}`,
       }
     ],
   },
@@ -48,12 +46,3 @@ const questions = [
   },
 ];
 
-it(`Render App`, () => {
-  const tree = renderer
-    .create(<App
-      errorsCount={3}
-      questions={questions}/>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
