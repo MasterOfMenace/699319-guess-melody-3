@@ -17,7 +17,7 @@ class App extends React.PureComponent {
 
   _renderGameScreen() {
     const {errorsCount, questions} = this.props;
-    const step = this.state;
+    const {step} = this.state;
     const question = questions[step];
 
     if (step === -1 || step >= questions.length) {
