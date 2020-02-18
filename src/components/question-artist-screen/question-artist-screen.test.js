@@ -28,8 +28,11 @@ it(`Should QuestionArtistScreen render correctly`, () => {
   const tree = renderer
     .create(<QuestionArtistScreen
       question={question}
-      onAnswer={()=>{}}/>)
-    .toJSON();
+      onAnswer={()=>{}}/>, {
+      createNodeMock: () => {
+        return {};
+      }
+    }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
