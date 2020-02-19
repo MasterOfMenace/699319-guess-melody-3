@@ -46,7 +46,8 @@ it(`Click on user answer should pass to the callback data-object from which this
   const gameScreen = shallow(
       <QuestionArtistScreen
         onAnswer={onAnswer}
-        question={question}/>
+        question={question}
+        renderPlayer={()=>{}}/>
   );
 
   const answerInputs = gameScreen.find(`input`);

@@ -14,6 +14,7 @@ it(`Правильное отображение компонента AudioPlayer
   const tree = renderer.create(<AudioPlayer
     isPlaying={false}
     src={song.src}
+    onPlayButtonClick={()=>{}}
   />, {
     createNodeMock: () => {
       return {};
