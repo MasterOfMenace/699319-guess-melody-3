@@ -15,6 +15,10 @@ class AudioPlayer extends React.PureComponent {
   }
 
   componentDidMount() {
+    if (!this._audioRef.current) {
+      return;
+    }
+
     const {src} = this.props;
     const audio = this._audioRef.current;
 
@@ -38,6 +42,9 @@ class AudioPlayer extends React.PureComponent {
   }
 
   componentWillUnmount() {
+    if (!this._audioRef.current) {
+      return;
+    }
     const audio = this._audioRef.current;
 
     audio.oncanplaythrough = null;
@@ -70,6 +77,9 @@ class AudioPlayer extends React.PureComponent {
   }
 
   componentDidUpdate() {
+    if (!this._audioRef.current) {
+      return;
+    }
     const audio = this._audioRef.current;
     if (this.props.isPlaying) {
       audio.play();
