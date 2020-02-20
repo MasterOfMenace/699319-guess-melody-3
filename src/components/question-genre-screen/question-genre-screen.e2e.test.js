@@ -43,7 +43,8 @@ it(`When user answers genre question form is not sent`, () => {
   const gameScreen = shallow(
       <QuestionGenreScreen
         onAnswer={onAnswer}
-        question={question}/>
+        question={question}
+        renderPlayer={()=>{}}/>
   );
 
   const form = gameScreen.find(`form`);
@@ -60,7 +61,8 @@ it(`User answer passed to callback is consistent with "userAnswer" prop`, () => 
   const gameScreen = shallow(
       <QuestionGenreScreen
         onAnswer={onAnswer}
-        question={question}/>
+        question={question}
+        renderPlayer={()=>{}}/>
   );
 
   const form = gameScreen.find(`form`);
