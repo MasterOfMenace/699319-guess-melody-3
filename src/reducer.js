@@ -1,8 +1,11 @@
 import {GameType} from "./const.js";
+import questions from './mocks/questions.js';
 
 const initialState = {
   mistakes: 0,
-  step: -1
+  step: -1,
+  maxMistakes: 3,
+  questions,
 };
 
 const isArtistAnswerCorrect = (question, userAnswer) => {
@@ -48,13 +51,25 @@ export const ActionType = {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.INCREASE_MISTAKES:
+      const mistakes = state.mistakes + action.payload;
+
+      if (mistakes >= state.maxMistakes) {
+        return Object.assign({}, initialState);
+      }
+
       return Object.assign({}, state, {
         mistakes: state.mistakes + action.payload
       });
 
     case ActionType.INCREASE_STEP:
+      let nextStep = state.step + action.payload;
+
+      if (nextStep >= state.questions.length) {
+        return Object.assign({}, initialState);
+      }
+
       return Object.assign({}, state, {
-        step: state.step + action.payload
+        step: nextStep
       });
   }
 
