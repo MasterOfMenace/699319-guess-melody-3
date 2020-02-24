@@ -10,15 +10,15 @@ export default [
     answers: [
       {
         artist: `John Snow`,
-        picture: `${ARTIST_PICTURE_URL}/${Math.random()}`,
+        picture: `${ARTIST_PICTURE_URL}/1`,
       },
       {
         artist: `Ozzy Osbourne`,
-        picture: `${ARTIST_PICTURE_URL}/${Math.random()}`,
+        picture: `${ARTIST_PICTURE_URL}/2`,
       },
       {
         artist: `Jim Beam`,
-        picture: `${ARTIST_PICTURE_URL}/${Math.random()}`,
+        picture: `${ARTIST_PICTURE_URL}/3`,
       }
     ],
   },
