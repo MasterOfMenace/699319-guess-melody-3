@@ -111,6 +111,34 @@ it(`Reducer должен увеличивать число ошибок в со�
   });
 });
 
+it(`Reducer должен вернуть store в начальное состояние и step: 0`, () => {
+  expect(reducer({
+    mistakes: 0,
+    step: 1,
+    questions
+  }, {
+    type: ActionType.RESET_GAME,
+  })).toEqual({
+    mistakes: 0,
+    step: 0,
+    maxMistakes: 3,
+    questions
+  });
+
+  expect(reducer({
+    mistakes: 3,
+    step: 2,
+    questions
+  }, {
+    type: ActionType.RESET_GAME
+  })).toEqual({
+    mistakes: 0,
+    step: 0,
+    maxMistakes: 3,
+    questions
+  });
+});
+
 describe(`Корректная работа ActionCreator`, () => {
   it(`ActionCreator.increaseStep возвращает корректный action`, () => {
     expect(ActionCreator.increaseStep()).toEqual({
@@ -222,6 +250,13 @@ describe(`Корректная работа ActionCreator`, () => {
     }, [true, true, true, true])).toEqual({
       type: ActionType.INCREASE_MISTAKES,
       payload: 1
+    });
+  });
+
+  it(`ActionCreator.resetGame должен вернуть корректный action`, () => {
+    expect(ActionCreator.resetGame())
+    .toEqual({
+      type: ActionType.RESET_GAME
     });
   });
 });
