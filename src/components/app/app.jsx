@@ -9,9 +9,10 @@ import QuestionArtistScreen from '../question-artist-screen/question-artist-scre
 import QuestionGenreScreen from '../question-genre-screen/question-genre-screen.jsx';
 import GameScreen from '../game-screen/game-screen.jsx';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
+import withUserAnswer from '../../hocs/with-user-answer/with-user-answer.jsx';
 
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
-const QuestionGenreScreenWrapped = withActivePlayer(QuestionGenreScreen);
+const QuestionGenreScreenWrapped = withActivePlayer(withUserAnswer(QuestionGenreScreen));
 
 class App extends React.PureComponent {
   _renderGameScreen() {
