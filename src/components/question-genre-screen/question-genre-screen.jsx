@@ -1,19 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {GameType} from '../../const.js';
+import QuestionGenreItem from '../question-genre-item/question-genre-item.jsx';
 
 class QuestionGenreScreen extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      answers: [false, false, false, false]
-    };
-  }
-
   render() {
-    const {onAnswer, question, renderPlayer} = this.props;
-    const {answers: userAnswers} = this.state;
+    const {onAnswer, onChange, question, renderPlayer, userAnswers} = this.props;
     const {answers, genre} = question;
 
     return (
@@ -22,25 +14,17 @@ class QuestionGenreScreen extends React.PureComponent {
         <form className="game__tracks"
           onSubmit={(evt) => {
             evt.preventDefault();
-            onAnswer(question, this.state.answers);
+            onAnswer();
           }}>
           {answers.map((answer, index) => (
-            <div key={`${index}-${answer.src}`} className="track">
-              {renderPlayer(answer.src, index)}
-              <div className="game__answer">
-                <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${index}`}
-                  id={`answer-${index}`}
-                  checked={userAnswers[index]}
-                  onChange={(evt) => {
-                    const value = evt.target.checked;
-
-                    this.setState({
-                      answers: [...userAnswers.slice(0, index), value, ...userAnswers.slice(index + 1)]
-                    });
-                  }}/>
-                <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
-              </div>
-            </div>
+            <QuestionGenreItem
+              id={index}
+              answer={answer}
+              key={`${index}-${answer.src}`}
+              onChange={onChange}
+              renderPlayer={renderPlayer}
+              userAnswer={userAnswers[index]}
+            />
           ))}
 
           <button className="game__submit button" type="submit">Ответить</button>
@@ -53,6 +37,8 @@ class QuestionGenreScreen extends React.PureComponent {
 QuestionGenreScreen.propTypes = {
   renderPlayer: PropTypes.func.isRequired,
   onAnswer: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
   question: PropTypes.shape({
     type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
     genre: PropTypes.string.isRequired,
