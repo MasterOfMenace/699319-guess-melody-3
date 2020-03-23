@@ -68,7 +68,6 @@ exports[`Правильное отображение компонента Author
     </p>
     <button
       className="login__button button"
-      onClick={[Function]}
       type="submit"
     >
       Войти
@@ -76,6 +75,7 @@ exports[`Правильное отображение компонента Author
   </form>
   <button
     className="replay"
+    onClick={[Function]}
     type="button"
   >
     Сыграть ещё раз

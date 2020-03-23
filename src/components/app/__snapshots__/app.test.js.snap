@@ -68,7 +68,6 @@ exports[`Отображение компонента App Отображение 
     </p>
     <button
       className="login__button button"
-      onClick={[Function]}
       type="submit"
     >
       Войти
@@ -76,6 +75,7 @@ exports[`Отображение компонента App Отображение 
   </form>
   <button
     className="replay"
+    onClick={[Function]}
     type="button"
   >
     Сыграть ещё раз
