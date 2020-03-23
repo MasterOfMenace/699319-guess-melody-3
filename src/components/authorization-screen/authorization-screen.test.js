@@ -7,6 +7,7 @@ it(`Правильное отображение компонента Authorizati
     .create(
         <AuthorizationScreen
           onReplayButtonClick={()=>{}}
+          onSubmit={()=>{}}
         />
     ).toJSON();
 

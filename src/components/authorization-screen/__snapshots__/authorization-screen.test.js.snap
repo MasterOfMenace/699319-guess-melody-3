@@ -22,11 +22,12 @@ exports[`Правильное отображение компонента Author
   <p
     className="login__text"
   >
-    Хотите узнать свой результат? Представтесь!
+    Хотите узнать свой результат? Представьтесь!
   </p>
   <form
     action=""
     className="login__form"
+    onSubmit={[Function]}
   >
     <p
       className="login__field"
