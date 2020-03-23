@@ -21,8 +21,11 @@ it(`При нажатии на кнопку воспроизведения кн�
       <AudioPlayer
         src={song.src}
         isPlaying={true}
+        isLoading={false}
         onPlayButtonClick={()=>{}}
-      />
+      >
+        <audio />
+      </AudioPlayer>
   );
 
   const button = player.find(`.track__button`);
