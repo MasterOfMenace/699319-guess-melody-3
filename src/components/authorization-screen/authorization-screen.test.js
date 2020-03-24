@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import renderer from 'react-test-renderer';
 import AuthorizationScreen from './authorization-screen.jsx';
 
