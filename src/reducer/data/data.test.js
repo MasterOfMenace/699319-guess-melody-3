@@ -1,6 +1,6 @@
-const ARTIST_PICTURE_URL = `https://api.adorable.io/avatars/128`;
+import {reducer, ActionType} from './data.js';
 
-export default [
+const questions = [
   {
     type: `artist`,
     song: {
@@ -10,15 +10,15 @@ export default [
     answers: [
       {
         artist: `John Snow`,
-        picture: `${ARTIST_PICTURE_URL}/1`,
+        picture: `https://api.adorable.io/avatars/128/1`,
       },
       {
         artist: `Ozzy Osbourne`,
-        picture: `${ARTIST_PICTURE_URL}/2`,
+        picture: `https://api.adorable.io/avatars/128/2`,
       },
       {
         artist: `Jim Beam`,
-        picture: `${ARTIST_PICTURE_URL}/3`,
+        picture: `https://api.adorable.io/avatars/128/3`,
       }
     ],
   },
@@ -46,3 +46,19 @@ export default [
   },
 ];
 
+it(`Reducer без параметров должен вернуть исходное состояние (initialState)`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    questions: []
+  });
+});
+
+it(`Reducer должен обновить questions путем загрузки вопросов с сервера`, () => {
+  expect(reducer({
+    questions: [],
+  }, {
+    type: ActionType.LOAD_QUESTIONS,
+    payload: questions
+  })).toEqual({
+    questions
+  });
+});

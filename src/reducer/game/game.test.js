@@ -1,57 +1,10 @@
-import {reducer, ActionType, ActionCreator} from './reducer.js';
-
-const questions = [
-  {
-    type: `artist`,
-    song: {
-      artist: `Jim Beam`,
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-    },
-    answers: [
-      {
-        artist: `John Snow`,
-        picture: `https://api.adorable.io/avatars/128/1`,
-      },
-      {
-        artist: `Ozzy Osbourne`,
-        picture: `https://api.adorable.io/avatars/128/2`,
-      },
-      {
-        artist: `Jim Beam`,
-        picture: `https://api.adorable.io/avatars/128/3`,
-      }
-    ],
-  },
-  {
-    type: `genre`,
-    genre: `rock`,
-    answers: [
-      {
-        genre: `rock`,
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-      },
-      {
-        genre: `blues`,
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-      },
-      {
-        genre: `jazz`,
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-      },
-      {
-        genre: `rock`,
-        src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
-      }
-    ],
-  },
-];
+import {reducer, ActionType, ActionCreator} from './game.js';
 
 it(`Reducer без параметров должен вернуть исходное состояние (initialState)`, () => {
   expect(reducer(void 0, {})).toEqual({
     mistakes: 0,
     step: -1,
     maxMistakes: 3,
-    questions
   });
 });
 
@@ -59,27 +12,23 @@ it(`Reducer должен увеличивать шаг в соответстви
   expect(reducer({
     mistakes: 0,
     step: -1,
-    questions
   }, {
     type: ActionType.INCREASE_STEP,
     payload: 1
   })).toEqual({
     mistakes: 0,
     step: 0,
-    questions
   });
 
   expect(reducer({
     mistakes: 0,
     step: -1,
-    questions
   }, {
     type: ActionType.INCREASE_STEP,
     payload: 0
   })).toEqual({
     mistakes: 0,
     step: -1,
-    questions
   });
 });
 
@@ -87,27 +36,23 @@ it(`Reducer должен увеличивать число ошибок в со�
   expect(reducer({
     mistakes: 0,
     step: -1,
-    questions
   }, {
     type: ActionType.INCREASE_MISTAKES,
     payload: 1
   })).toEqual({
     mistakes: 1,
     step: -1,
-    questions
   });
 
   expect(reducer({
     mistakes: 0,
     step: -1,
-    questions
   }, {
     type: ActionType.INCREASE_MISTAKES,
     payload: 0
   })).toEqual({
     mistakes: 0,
     step: -1,
-    questions
   });
 });
 
@@ -115,27 +60,23 @@ it(`Reducer должен вернуть store в начальное состоя
   expect(reducer({
     mistakes: 0,
     step: 1,
-    questions
   }, {
     type: ActionType.RESET_GAME,
   })).toEqual({
     mistakes: 0,
     step: 0,
     maxMistakes: 3,
-    questions
   });
 
   expect(reducer({
     mistakes: 3,
     step: 2,
-    questions
   }, {
     type: ActionType.RESET_GAME
   })).toEqual({
     mistakes: 0,
     step: 0,
     maxMistakes: 3,
-    questions
   });
 });
 

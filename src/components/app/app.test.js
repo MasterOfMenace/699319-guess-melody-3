@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {App} from './app.jsx';
+import NameSpace from '../../reducer/name-space.js';
 
 const mockStore = configureStore([]);
 
@@ -55,7 +56,9 @@ const questions = [
 describe(`Отображение компонента App`, () => {
   it(`Отображение компонента WelcomeScreen`, () => {
     const store = mockStore({
-      mistakes: 0
+      [NameSpace.GAME]: {
+        mistakes: 0
+      }
     });
 
     const tree = renderer
@@ -83,7 +86,9 @@ describe(`Отображение компонента App`, () => {
 
   it(`Отображение компонента QuestionGenreScreen`, () => {
     const store = mockStore({
-      mistakes: 3
+      [NameSpace.GAME]: {
+        mistakes: 3
+      }
     });
 
     const tree = renderer
@@ -111,7 +116,9 @@ describe(`Отображение компонента App`, () => {
 
   it(`Отображение компонента QuestionArtistScreen`, () => {
     const store = mockStore({
-      mistakes: 0
+      [NameSpace.GAME]: {
+        mistakes: 0
+      }
     });
 
     const tree = renderer
@@ -139,7 +146,9 @@ describe(`Отображение компонента App`, () => {
 
   it(`Отображение компонента GameOverScreen`, () => {
     const store = mockStore({
-      mistakes: 3
+      [NameSpace.GAME]: {
+        mistakes: 3
+      }
     });
 
     const tree = renderer
@@ -167,7 +176,9 @@ describe(`Отображение компонента App`, () => {
 
   it(`Отображение компонента WinScreen`, () => {
     const store = mockStore({
-      mistakes: 0
+      [NameSpace.GAME]: {
+        mistakes: 3
+      }
     });
 
     const tree = renderer

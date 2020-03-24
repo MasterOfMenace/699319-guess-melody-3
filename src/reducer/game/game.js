@@ -1,11 +1,9 @@
-import {GameType} from "./const.js";
-import questions from './mocks/questions.js';
+import {GameType} from '../../const.js';
 
 const initialState = {
   mistakes: 0,
   step: -1,
   maxMistakes: 3,
-  questions,
 };
 
 const isArtistAnswerCorrect = (question, userAnswer) => {
@@ -16,6 +14,12 @@ const isGenreAnswerCorrect = (question, userAnswer) => {
   return userAnswer.every((it, index) => {
     return it === (question.answers[index].genre === question.genre);
   });
+};
+
+export const ActionType = {
+  INCREASE_MISTAKES: `increase_mistakes`,
+  INCREASE_STEP: `increase_step`,
+  RESET_GAME: `reset_game`,
 };
 
 export const ActionCreator = {
@@ -44,13 +48,7 @@ export const ActionCreator = {
 
   resetGame: () => ({
     type: ActionType.RESET_GAME
-  })
-};
-
-export const ActionType = {
-  INCREASE_MISTAKES: `increase_mistakes`,
-  INCREASE_STEP: `increase_step`,
-  RESET_GAME: `reset_game`
+  }),
 };
 
 export const reducer = (state = initialState, action) => {
