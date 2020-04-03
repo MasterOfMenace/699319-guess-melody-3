@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../reducer/game/game.js';
 import {Operation as UserOperation, AuthorizationStatus} from '../../reducer/user/user.js';
@@ -12,11 +12,14 @@ import GameScreen from '../game-screen/game-screen.jsx';
 import GameOverScreen from '../game-over-screen/game-over-screen.jsx';
 import WinScreen from '../win-screen/win-screen.jsx';
 import AuthorizationScreen from '../authorization-screen/authorization-screen.jsx';
+import PrivateRoute from '../private-route/private-route.jsx';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player.jsx';
 import withUserAnswer from '../../hocs/with-user-answer/with-user-answer.jsx';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 import {getStep, getMistakes, getMaxMistakes} from '../../reducer/game/selectors.js';
 import {getQuestions} from '../../reducer/data/selectors.js';
+import history from '../../history.js';
+import {AppRoute} from '../../const.js';
 
 const QuestionArtistScreenWrapped = withActivePlayer(QuestionArtistScreen);
 const QuestionGenreScreenWrapped = withActivePlayer(withUserAnswer(QuestionGenreScreen));
@@ -101,32 +104,40 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {questions} = this.props;
+    const {questions, resetGame, login, mistakes} = this.props;
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.ROOT}>
             {this._renderGameScreen()}
           </Route>
-          <Route exact path="/dev-artist">
-            <QuestionArtistScreenWrapped
-              question={questions[0]}
-              onAnswer={()=>{}}/>
-          </Route>
-          <Route exact path="/dev-genre">
-            <QuestionGenreScreenWrapped
-              question={questions[1]}
-              onAnswer={()=>{}}/>
-          </Route>
-          <Route exact path="/dev-auth">
+          <Route exact path={AppRoute.LOGIN}>
             <AuthorizationScreen
-              onReplayButtonClick={()=>{}}
-              onSubmit={()=>{}}
+              onReplayButtonClick={resetGame}
+              onSubmit={login}
             />
           </Route>
+          <Route exact path={AppRoute.LOSE}>
+            <GameOverScreen
+              onReplayButtonClick={resetGame}
+            />
+          </Route>
+          <PrivateRoute
+            exact
+            path={AppRoute.RESULT}
+            render={() => {
+              return (
+                <WinScreen
+                  questionsCount={questions.length}
+                  mistakes={mistakes}
+                  onReplayButtonClick={resetGame}
+                />
+              );
+            }}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

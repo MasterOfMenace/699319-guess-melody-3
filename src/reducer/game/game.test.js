@@ -1,84 +1,109 @@
 import {reducer, ActionType, ActionCreator} from './game.js';
 
-it(`Reducer без параметров должен вернуть исходное состояние (initialState)`, () => {
-  expect(reducer(void 0, {})).toEqual({
-    mistakes: 0,
-    step: -1,
-    maxMistakes: 3,
+describe(`Корректная работа Reducer`, () => {
+  it(`Reducer без параметров должен вернуть исходное состояние (initialState)`, () => {
+    expect(reducer(void 0, {})).toEqual({
+      mistakes: 0,
+      step: -1,
+      maxMistakes: 3,
+    });
+  });
+
+  it(`Reducer должен увеличивать шаг в соответствии с переданным значением`, () => {
+    expect(reducer({
+      mistakes: 0,
+      step: -1,
+    }, {
+      type: ActionType.INCREASE_STEP,
+      payload: 1
+    })).toEqual({
+      mistakes: 0,
+      step: 0,
+    });
+
+    expect(reducer({
+      mistakes: 0,
+      step: -1,
+    }, {
+      type: ActionType.INCREASE_STEP,
+      payload: 0
+    })).toEqual({
+      mistakes: 0,
+      step: -1,
+    });
+  });
+
+  it(`Reducer должен увеличивать число ошибок в соответствии с переданным значением`, () => {
+    expect(reducer({
+      mistakes: 0,
+      step: -1,
+    }, {
+      type: ActionType.INCREASE_MISTAKES,
+      payload: 1
+    })).toEqual({
+      mistakes: 1,
+      step: -1,
+    });
+
+    expect(reducer({
+      mistakes: 0,
+      step: -1,
+    }, {
+      type: ActionType.INCREASE_MISTAKES,
+      payload: 0
+    })).toEqual({
+      mistakes: 0,
+      step: -1,
+    });
+  });
+
+  it(`Reducer должен вернуть store в начальное состояние и step: 0`, () => {
+    expect(reducer({
+      mistakes: 0,
+      step: 1,
+    }, {
+      type: ActionType.RESET_GAME,
+    })).toEqual({
+      mistakes: 0,
+      step: 0,
+      maxMistakes: 3,
+    });
+
+    expect(reducer({
+      mistakes: 3,
+      step: 2,
+    }, {
+      type: ActionType.RESET_GAME
+    })).toEqual({
+      mistakes: 0,
+      step: 0,
+      maxMistakes: 3,
+    });
+  });
+
+  it(`Reducer должен вернуть step: -1`, () => {
+    expect(reducer({
+      mistakes: 0,
+      step: 1,
+    }, {
+      type: ActionType.GO_TO_WELCOME_SCREEN,
+    })).toEqual({
+      mistakes: 0,
+      step: -1
+    });
+
+    expect(reducer({
+      mistakes: 3,
+      step: 2,
+    }, {
+      type: ActionType.GO_TO_WELCOME_SCREEN
+    })).toEqual({
+      mistakes: 3,
+      step: -1,
+    });
   });
 });
 
-it(`Reducer должен увеличивать шаг в соответствии с переданным значением`, () => {
-  expect(reducer({
-    mistakes: 0,
-    step: -1,
-  }, {
-    type: ActionType.INCREASE_STEP,
-    payload: 1
-  })).toEqual({
-    mistakes: 0,
-    step: 0,
-  });
-
-  expect(reducer({
-    mistakes: 0,
-    step: -1,
-  }, {
-    type: ActionType.INCREASE_STEP,
-    payload: 0
-  })).toEqual({
-    mistakes: 0,
-    step: -1,
-  });
-});
-
-it(`Reducer должен увеличивать число ошибок в соответствии с переданным значением`, () => {
-  expect(reducer({
-    mistakes: 0,
-    step: -1,
-  }, {
-    type: ActionType.INCREASE_MISTAKES,
-    payload: 1
-  })).toEqual({
-    mistakes: 1,
-    step: -1,
-  });
-
-  expect(reducer({
-    mistakes: 0,
-    step: -1,
-  }, {
-    type: ActionType.INCREASE_MISTAKES,
-    payload: 0
-  })).toEqual({
-    mistakes: 0,
-    step: -1,
-  });
-});
-
-it(`Reducer должен вернуть store в начальное состояние и step: 0`, () => {
-  expect(reducer({
-    mistakes: 0,
-    step: 1,
-  }, {
-    type: ActionType.RESET_GAME,
-  })).toEqual({
-    mistakes: 0,
-    step: 0,
-    maxMistakes: 3,
-  });
-
-  expect(reducer({
-    mistakes: 3,
-    step: 2,
-  }, {
-    type: ActionType.RESET_GAME
-  })).toEqual({
-    mistakes: 0,
-    step: 0,
-    maxMistakes: 3,
-  });
-});
 
 describe(`Корректная работа ActionCreator`, () => {
   it(`ActionCreator.increaseStep возвращает корректный action`, () => {
@@ -198,6 +223,13 @@ describe(`Корректная работа ActionCreator`, () => {
     expect(ActionCreator.resetGame())
     .toEqual({
       type: ActionType.RESET_GAME
+    });
+  });
+
+  it(`ActionCreator.goToWelcomeScreen должен вернуть корректный action`, () => {
+    expect(ActionCreator.goToWelcomeScreen())
+    .toEqual({
+      type: ActionType.GO_TO_WELCOME_SCREEN
     });
   });
 });

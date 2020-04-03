@@ -28,13 +28,13 @@ exports[`Правильное отображение компонента WinScr
     0
      ошибки
   </p>
-  <button
+  <a
     className="replay"
+    href="/"
     onClick={[Function]}
-    type="button"
   >
     Сыграть ещё раз
-  </button>
+  </a>
 </section>
 `;
 
@@ -66,12 +66,12 @@ exports[`Правильное отображение компонента WinScr
     1
      ошибки
   </p>
-  <button
+  <a
     className="replay"
+    href="/"
     onClick={[Function]}
-    type="button"
   >
     Сыграть ещё раз
-  </button>
+  </a>
 </section>
 `;

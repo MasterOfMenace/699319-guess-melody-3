@@ -20,6 +20,7 @@ export const ActionType = {
   INCREASE_MISTAKES: `increase_mistakes`,
   INCREASE_STEP: `increase_step`,
   RESET_GAME: `reset_game`,
+  GO_TO_WELCOME_SCREEN: `go_to_welcome_screen`
 };
 
 export const ActionCreator = {
@@ -49,6 +50,10 @@ export const ActionCreator = {
   resetGame: () => ({
     type: ActionType.RESET_GAME
   }),
+
+  goToWelcomeScreen: () => ({
+    type: ActionType.GO_TO_WELCOME_SCREEN
+  })
 };
 
 export const reducer = (state = initialState, action) => {
@@ -66,6 +71,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.RESET_GAME:
       return Object.assign({}, initialState, {
         step: 0
+      });
+
+    case ActionType.GO_TO_WELCOME_SCREEN:
+      return Object.assign({}, state, {
+        step: -1
       });
   }
 
