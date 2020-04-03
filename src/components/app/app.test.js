@@ -59,6 +59,9 @@ describe(`Отображение компонента App`, () => {
     const store = mockStore({
       [NameSpace.GAME]: {
         mistakes: 0
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH
       }
     });
 
@@ -187,6 +190,9 @@ describe(`Отображение компонента App`, () => {
     const store = mockStore({
       [NameSpace.GAME]: {
         mistakes: 3
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.AUTH
       }
     });
 
@@ -219,6 +225,9 @@ describe(`Отображение компонента App`, () => {
     const store = mockStore({
       [NameSpace.GAME]: {
         mistakes: 3
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH
       }
     });
 

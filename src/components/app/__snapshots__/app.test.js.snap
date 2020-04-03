@@ -107,13 +107,13 @@ exports[`Отображение компонента App Отображение 
   >
     У вас закончились все попытки. Ничего, повезёт в следующий раз!
   </p>
-  <button
+  <a
     className="replay"
+    href="/"
     onClick={[Function]}
-    type="button"
   >
     Попробовать ещё раз
-  </button>
+  </a>
 </section>
 `;
 
@@ -126,7 +126,8 @@ exports[`Отображение компонента App Отображение 
   >
     <a
       className="game__back"
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"
@@ -332,7 +333,8 @@ exports[`Отображение компонента App Отображение 
   >
     <a
       className="game__back"
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="visually-hidden"
@@ -538,10 +540,10 @@ exports[`Отображение компонента App Отображение 
 
 exports[`Отображение компонента App Отображение компонента WinScreen 1`] = `
 <section
-  className="result"
+  className="login"
 >
   <div
-    className="result__logo"
+    className="login__logo"
   >
     <img
       alt="Угадай мелодию"
@@ -551,19 +553,64 @@ exports[`Отображение компонента App Отображение 
     />
   </div>
   <h2
-    className="result__title"
+    className="login__title"
   >
     Вы настоящий меломан!
   </h2>
   <p
-    className="result__total"
+    className="login__text"
   >
-    Вы ответили правильно на 
-    2
-     вопросов и совершили 
-    0
-     ошибки
+    Хотите узнать свой результат? Представьтесь!
   </p>
+  <form
+    action=""
+    className="login__form"
+    onSubmit={[Function]}
+  >
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="name"
+      >
+        Логин
+      </label>
+      <input
+        className="login__input"
+        id="name"
+        name="name"
+        type="text"
+      />
+    </p>
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="login__input"
+        id="password"
+        name="password"
+        type="text"
+      />
+      <span
+        className="login__error"
+      >
+        Неверный пароль
+      </span>
+    </p>
+    <button
+      className="login__button button"
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
   <button
     className="replay"
     onClick={[Function]}
